@@ -1,6 +1,6 @@
 package com.saserpe.api.controller;
 
-import com.saserpe.api.controller.service.ProvinceService;
+import com.saserpe.api.service.ProvinceService;
 import com.saserpe.api.model.Province;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,5 +53,5 @@ public class ProvinceController {
     @DeleteMapping("/provinces/{id}")
     public void delete(@PathVariable Integer id){
         service.delete(id);
-    }
+    } 
 }

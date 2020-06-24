@@ -1,4 +1,4 @@
-package com.saserpe.api.controller.repository;
+package com.saserpe.api.repository;
 
 import com.saserpe.api.model.Province;
 import org.springframework.data.jpa.repository.JpaRepository;

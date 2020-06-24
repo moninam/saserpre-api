@@ -1,11 +1,9 @@
-package com.saserpe.api.controller.service;
+package com.saserpe.api.service;
 
-import com.saserpe.api.controller.repository.ProvinceRepository;
+import com.saserpe.api.repository.ProvinceRepository;
 import com.saserpe.api.model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
