@@ -85,7 +85,7 @@ public class HilosController {
                             setTransaccion(winner);
                             updatePortafolio(winner);
                             updatePrecioAccion(winner);
-
+                            updateAccionesEmpresa(winner.getRFC_empresa(),winner);
                             break;
                         case "V":
                             logger.debug("Caso Venta: ");
@@ -94,6 +94,7 @@ public class HilosController {
                             setTransaccion(winnerV);
                             updatePortafolio(winnerV);
                             updatePrecioAccion(winnerV);
+                            updateAccionesEmpresa(winnerV.getRFC_empresa(),winnerV);
                             break;
                     }
                     logger.debug("Finalizo Hilos, borra hilo");
@@ -365,6 +366,26 @@ public class HilosController {
             notificarEvento(me.getKey().toString(),"actualizar-propuesta",json);
         }
     }
+
+    private void updateAccionesEmpresa(String RFCEmpresa,Propuesta ganador){
+        try{
+            Empresa emp = empresaService.findById(RFCEmpresa);
+            Integer acciones = emp.getAcciones_empr_disp();
+            switch (ganador.getTipo_accion()){
+                case "C":
+                    acciones = emp.getAcciones_empr_disp() - ganador.getOperacion_accion_prop();
+                    break;
+                case "V":
+                    acciones = emp.getAcciones_empr_disp() + ganador.getOperacion_accion_prop();
+                    break;
+            }
+            empresaService.updateAccionesDisp(acciones,RFCEmpresa);
+        } catch (NoSuchElementException exc){
+
+        }
+
+    }
+
     private String setDate(){
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

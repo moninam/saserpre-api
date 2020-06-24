@@ -43,4 +43,8 @@ public class HilosService {
     public void disableHilos(String idHilo){
         repository.disableHilo(idHilo);
     }
+
+    public void enableHilos(String idHilo){
+        repository.enableHilo(idHilo);
+    }
 }

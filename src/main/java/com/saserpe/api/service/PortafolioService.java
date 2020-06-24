@@ -38,7 +38,7 @@ public class PortafolioService {
     public Portafolio getPortafolio(String RFCUsuario, String RFCEmpresa){
         return repository.getElemento(RFCUsuario,RFCEmpresa);
     }
-    public Portafolio getPortafolioByRFCUsuario(String RFCUsuario){
+    public List<Portafolio> getPortafolioByRFCUsuario(String RFCUsuario){
         return repository.getElementByRFCUsuario(RFCUsuario);
     }
 }

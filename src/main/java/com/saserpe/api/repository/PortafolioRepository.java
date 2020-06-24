@@ -31,6 +31,6 @@ public interface PortafolioRepository extends JpaRepository<Portafolio,Integer> 
     Portafolio getElemento(String RFCUsuario, String RFCEmpresa);
 
     @Query(nativeQuery = true, value = "Select * from Portafolio porta " +
-            "where porta.RFC_usuario = ?1 limit 1")
-    Portafolio getElementByRFCUsuario(String RFCUsuario);
+            "where porta.RFC_usuario = ?1 ")
+    List<Portafolio> getElementByRFCUsuario(String RFCUsuario);
 }

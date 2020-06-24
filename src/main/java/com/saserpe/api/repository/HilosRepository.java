@@ -38,4 +38,11 @@ public interface HilosRepository extends JpaRepository<Hilos,Integer> {
             "SET hilo.activo = false " +
             "where hilo.id_hilo = ?1")
     void disableHilo(String idHilo);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "UPDATE Hilos hilo " +
+            "SET hilo.activo = true " +
+            "where hilo.id_hilo = ?1")
+    void enableHilo(String idHilo);
 }

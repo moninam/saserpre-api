@@ -18,7 +18,7 @@ public class Usuario {
     private String nombre_usuario;
 
     @Column(name="contra_usuario")
-    @JsonProperty("contra_usuarioo")
+    @JsonProperty("contra_usuario")
     private String contra_usuario;
 
     public Usuario(String RFC_usuario, String nombre_usuario, String contra_usuario) {
