@@ -21,7 +21,15 @@ public interface PortafolioRepository extends JpaRepository<Portafolio,Integer> 
     @Modifying
     @Transactional
     @Query(nativeQuery = true, value = "UPDATE Portafolio porta " +
-            "SET porta.acciones_usr = ?1 " +
+            "SET porta.precio_compra = ?1 " +
+            "where porta.RFC_usuario = ?2 " +
+            "and porta.RFC_empresa = ?3")
+    void updatePrecioCompra(float precio, String RFC_usuario, String RFC_empresa);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "UPDATE Portafolio porta " +
+            "SET porta.precio_accion_usr = ?1 " +
             "where porta.RFC_empresa = ?2")
     void updatePrecioAccion(float precioA, String RFC_empresa);
 

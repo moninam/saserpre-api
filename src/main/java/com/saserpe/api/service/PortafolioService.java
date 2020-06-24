@@ -35,6 +35,10 @@ public class PortafolioService {
     public void updatePrecioAccion(float precio, String RFCEmpresa){
         repository.updatePrecioAccion(precio,RFCEmpresa);
     }
+    public void updatePrecioCompra(float precio, String RFCUsuario,String RFCEmpresa){
+        repository.updatePrecioCompra(precio,RFCUsuario,RFCEmpresa);
+    }
+
     public Portafolio getPortafolio(String RFCUsuario, String RFCEmpresa){
         return repository.getElemento(RFCUsuario,RFCEmpresa);
     }

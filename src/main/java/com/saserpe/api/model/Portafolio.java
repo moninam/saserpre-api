@@ -29,16 +29,30 @@ public class Portafolio {
     @JsonProperty("acciones_usr")
     private Integer acciones_usr;
 
-    public Portafolio(Integer id_porta, String RFC_usuario, String RFC_empresa, float precio_accion_usr, Integer acciones_usr) {
+    @Column(name="precio_compra")
+    @JsonProperty("precio_compra")
+    private float precio_compra;
+
+    public Portafolio(Integer id_porta, String RFC_usuario, String RFC_empresa, float precio_accion_usr, Integer acciones_usr, float precioC) {
         this.id_porta = id_porta;
         this.RFC_usuario = RFC_usuario;
         this.RFC_empresa = RFC_empresa;
         this.precio_accion_usr = precio_accion_usr;
         this.acciones_usr = acciones_usr;
+        this.precio_compra = precioC;
     }
     public Portafolio(){
 
     }
+
+    public float getPrecio_compra() {
+        return precio_compra;
+    }
+
+    public void setPrecio_compra(float precio_compra) {
+        this.precio_compra = precio_compra;
+    }
+
     public Integer getId_porta() {
         return id_porta;
     }

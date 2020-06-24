@@ -316,13 +316,14 @@ public class HilosController {
                     break;
             }
             portafolioService.updateUsrAcciones(temp,RFCUsuario,RFCEmpresa);
+            portafolioService.updatePrecioCompra(precioAccion,RFCUsuario,RFCEmpresa);
         } else{
             Portafolio temporal = new Portafolio();
             temporal.setRFC_usuario(RFCUsuario);
             temporal.setRFC_empresa(RFCEmpresa);
             temporal.setPrecio_accion_usr(precioAccion);
             temporal.setAcciones_usr(numeroAcciones);
-
+            temporal.setPrecio_compra(precioAccion);
             portafolioService.save(temporal);
         }
     }
