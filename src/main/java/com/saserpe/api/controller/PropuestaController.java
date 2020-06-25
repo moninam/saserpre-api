@@ -80,7 +80,7 @@ public class PropuestaController {
     @CrossOrigin(origins = "http://localhost")
     public ResponseEntity<SseEmitter> suscribePropuesta(){
         logger.debug("Se imprime clase");
-        SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
+        SseEmitter sseEmitter = new SseEmitter(-1L);
 
         try{
             sseEmitter.send(SseEmitter.event().name("INIT"));
@@ -88,6 +88,7 @@ public class PropuestaController {
             logger.error("Error en el envio de evento {}",exc.getMessage());
         }
         sseEmitter.onCompletion(() -> emitters.remove(sseEmitter));
+
         emitters.add(sseEmitter);
         return new ResponseEntity<SseEmitter>(sseEmitter, HttpStatus.OK);
     }
@@ -222,17 +223,5 @@ public class PropuestaController {
         return sdf.format(cal.getTime());
     }
 
-    private void getDifference() throws ParseException {
-        String time1 = "21:33:33";
-        String time2 = "23:33:33";
 
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        Date date1 = format.parse(time1);
-        Date date2 = format.parse(time2);
-
-        long difference = date2.getTime() - date1.getTime();
-
-        logger.debug("Diferencia de tiempo en milisegundos {}",difference);
-
-    }
 }
