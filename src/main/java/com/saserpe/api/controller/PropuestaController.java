@@ -93,7 +93,7 @@ public class PropuestaController {
         return new ResponseEntity<SseEmitter>(sseEmitter, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/upload-propuesta",method= RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/upload-propuesta",method= RequestMethod.POST,consumes =MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost")
     public ResponseEntity<String> uploadPropuesta(@RequestBody Propuesta propuesta){
         String tAccion = propuesta.getTipo_accion();

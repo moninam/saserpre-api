@@ -53,6 +53,7 @@ public class HilosController {
         sseEmitter.onTimeout(()->emitters.remove(sseEmitter));
         sseEmitter.onCompletion(() -> emitters.remove(sseEmitter));
         sseEmitter.onError((e) ->emitters.remove(sseEmitter));
+        showAllPropuesta(sessionID);
         return new ResponseEntity<SseEmitter>(sseEmitter, HttpStatus.OK);
     }
 
@@ -366,6 +367,20 @@ public class HilosController {
         for (Map.Entry me : emitters.entrySet()) {
             notificarEvento(me.getKey().toString(),"actualizar-propuesta",json);
         }
+    }
+
+    private void showAllPropuesta(String sessionID){
+        List<Propuesta> temp = propuestaService.listAll();
+        String json;
+        if(temp != null){
+            json = new Gson().toJson(temp);
+        } else{
+            json = new JSONObject()
+                    .put("code",404)
+                    .put("mensaje","No existen propuestas registradas")
+                    .toString();
+        }
+        notificarEvento(sessionID,"actualizar-propuesta",json);
     }
 
     private void updateAccionesEmpresa(String RFCEmpresa,Propuesta ganador){
