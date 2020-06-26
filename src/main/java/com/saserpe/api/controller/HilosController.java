@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @EnableScheduling
 @RestController
@@ -210,6 +208,8 @@ public class HilosController {
             String eventFormatted = new JSONObject()
                     .put("usuario",ganador.getRFC_usuario())
                     .put("ganador",true)
+                    .put("empresa",ganador.getRFC_empresa())
+                    .put("tipo de accion",ganador.getTipo_accion())
                     .put("hilo",ganador.getId_hilo()).toString();
 
             logger.debug("Ganador es {}",ganador.getRFC_usuario());
@@ -380,7 +380,7 @@ public class HilosController {
                     .put("mensaje","No existen propuestas registradas")
                     .toString();
         }
-        notificarEvento(sessionID,"actualizar-propuesta",json);
+        notificarEvento(sessionID,"primera-propuesta",json);
     }
 
     private void updateAccionesEmpresa(String RFCEmpresa,Propuesta ganador){

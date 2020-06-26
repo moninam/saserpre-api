@@ -1,7 +1,6 @@
 package com.saserpe.api.controller;
 
 import com.saserpe.api.model.Empresa;
-import com.saserpe.api.model.Usuario;
 import com.saserpe.api.service.EmpresaService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
