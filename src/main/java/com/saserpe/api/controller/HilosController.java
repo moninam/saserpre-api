@@ -44,13 +44,13 @@ public class HilosController {
     @GetMapping(value = "/suscribe-hilos",consumes = MediaType.ALL_VALUE)
     @CrossOrigin(origins = "http://localhost")
     public ResponseEntity<SseEmitter> suscribeHilo(@RequestParam String sessionID){
-        SseEmitter sseEmitter = new SseEmitter(-1L);
+        SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
         sendInitEvent(sseEmitter);
-        emitters.put(sessionID,sseEmitter);
 
         sseEmitter.onTimeout(()->emitters.remove(sseEmitter));
         sseEmitter.onCompletion(() -> emitters.remove(sseEmitter));
         sseEmitter.onError((e) ->emitters.remove(sseEmitter));
+        emitters.put(sessionID,sseEmitter);
         showAllPropuesta(sessionID);
         return new ResponseEntity<SseEmitter>(sseEmitter, HttpStatus.OK);
     }
@@ -186,7 +186,7 @@ public class HilosController {
         if (emitter != null){
             try{
                 emitter.send(SseEmitter.event().name(tipoEvento).data(response));
-            } catch (IOException exc){
+            } catch (Exception exc){
                 emitters.remove(emitter);
             }
         }

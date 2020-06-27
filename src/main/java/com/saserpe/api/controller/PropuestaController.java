@@ -1,5 +1,6 @@
 package com.saserpe.api.controller;
 
+import com.google.gson.Gson;
 import com.saserpe.api.model.*;
 import com.saserpe.api.service.EmpresaService;
 import com.saserpe.api.service.HilosService;
@@ -95,7 +96,7 @@ public class PropuestaController {
 
     @RequestMapping(value = "/upload-propuesta",method= RequestMethod.POST,consumes =MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost")
-    public ResponseEntity<String> uploadPropuesta(@RequestBody Propuesta propuesta){
+    public ResponseEntity<?> uploadPropuesta(@RequestBody Propuesta propuesta){
         String tAccion = propuesta.getTipo_accion();
 
         if (tAccion != null){
@@ -203,7 +204,8 @@ public class PropuestaController {
                     emitters.remove(emitter);
                 }
             }
-            return new ResponseEntity<>(exitoProp,HttpStatus.OK);
+            String json = new Gson().toJson(exitoProp);
+            return new ResponseEntity<>(json,HttpStatus.OK);
         } else{
             return new ResponseEntity<>(accionNL,HttpStatus.NOT_FOUND);
         }
