@@ -31,7 +31,7 @@ public class PropuestaController {
     private  Logger logger = LogManager.getLogger(this.getClass());
     public List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
-    //Mensajes a devolver
+    /*
     public static String empresaNone = new JSONObject()
             .put("code",404)
             .put("mensaje","La empresa no se encuentra registrada en el sistema")
@@ -66,7 +66,18 @@ public class PropuestaController {
     public static String exitoProp = new JSONObject()
             .put("code",200)
             .put("mensaje","La propuesta fue realizada con exito")
-            .toString();
+            .toString();*/
+
+    public Map<String, String> mensajes = new HashMap<>();
+    public Map<String, String> empresaNone = new HashMap<>();
+    public Map<String, String> accionesInEm = new HashMap<>();
+    public Map<String, String> precioNPEmp = new HashMap<>();
+    public Map<String, String> portafolioNone = new HashMap<>();
+    public Map<String, String> accionesInUsr = new HashMap<>();
+    public Map<String, String> precioNPUsr = new HashMap<>();
+    public Map<String, String> accionNL= new HashMap<>();
+
+
     //Termina Seccion de mensajes
     @Autowired
     private PropuestaService service;
@@ -98,7 +109,7 @@ public class PropuestaController {
     @CrossOrigin(origins = "http://localhost")
     public ResponseEntity<?> uploadPropuesta(@RequestBody Propuesta propuesta){
         String tAccion = propuesta.getTipo_accion();
-
+        fillMessages();
         if (tAccion != null){
             switch (tAccion){
                 case "C":
@@ -204,8 +215,8 @@ public class PropuestaController {
                     emitters.remove(emitter);
                 }
             }
-            String json = new Gson().toJson(exitoProp);
-            return new ResponseEntity<>(json,HttpStatus.OK);
+
+            return new ResponseEntity<>(mensajes,HttpStatus.OK);
         } else{
             return new ResponseEntity<>(accionNL,HttpStatus.NOT_FOUND);
         }
@@ -223,6 +234,34 @@ public class PropuestaController {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(cal.getTime());
+    }
+
+    private void fillMessages(){
+        mensajes.put("code","200");
+        mensajes.put("mensaje","La propuesta fue realizada con exito");
+
+        empresaNone.put("code","404");
+        empresaNone.put("mensaje","La empresa no se encuentra registrada en el sistema");
+
+        accionesInEm.put("code","404");
+        accionesInEm.put("mensaje","La empresa no cuenta con las acciones suficientes para continuar la transaccion");
+
+        precioNPEmp.put("code","404");
+        precioNPEmp.put("mensaje","El precio de la accion no puede ser menor al precio actual");
+
+        portafolioNone.put("code","404");
+        portafolioNone.put("mensaje","No cuenta con un portafolio de acciones para la empresa seleccionada");
+
+        accionesInUsr.put("code","404");
+        accionesInUsr.put("mensaje","No cuenta con las acciones suficientes para realizar la venta");
+
+        precioNPUsr.put("code","404");
+        precioNPUsr.put("mensaje","El precio de la accion no puede ser mayor al precio actual");
+
+        accionNL.put("code","404");
+        accionNL.put("mensaje","Tipo de operacion no permitida");
+
+
     }
 
 
