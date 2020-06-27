@@ -307,6 +307,7 @@ public class HilosController {
                         item = 0;
                     }
                     temp = item;
+                    portafolioService.updatePrecioCompra(precioAccion,RFCUsuario,RFCEmpresa);
                     break;
                 case "V":
                     Integer itemV = userPortafolio.getAcciones_usr() - numeroAcciones;
@@ -317,7 +318,7 @@ public class HilosController {
                     break;
             }
             portafolioService.updateUsrAcciones(temp,RFCUsuario,RFCEmpresa);
-            portafolioService.updatePrecioCompra(precioAccion,RFCUsuario,RFCEmpresa);
+
         } else{
             Portafolio temporal = new Portafolio();
             temporal.setRFC_usuario(RFCUsuario);
