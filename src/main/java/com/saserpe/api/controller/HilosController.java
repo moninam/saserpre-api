@@ -66,7 +66,7 @@ public class HilosController {
                 long difference = getDifference(tiempoHilo,tiempoAct);
                 logger.debug("Diferencia de tiempos {}",difference);
 
-                if (difference > 120000L){
+                if (difference > 30000L){
                     String idHilo = item.getId_hilo();
                     logger.debug("Hilo : {}",item.getId_hilo());
                     logger.debug("Envias mensaje de bloqueo");
@@ -223,11 +223,11 @@ public class HilosController {
                 }
             }
         }
-        notificarPropuestaUsuario(idHilo,ganador.getRFC_usuario());
+        notificarPropuestaUsuario(idHilo,ganador.getRFC_usuario(),ganador.getTipo_accion(),ganador.getRFC_empresa());
         return ganador;
     }
 
-    private void notificarPropuestaUsuario(String idHilo, String idUsuario){
+    private void notificarPropuestaUsuario(String idHilo, String idUsuario,String tipoAccion,String empresa){
         logger.debug("Notificando a perdedores");
         List<Propuesta> propuestas = propuestaService.getPropuestaByIdHilos(idHilo);
         List<Acceso> accesosN = new ArrayList<>();
@@ -250,6 +250,8 @@ public class HilosController {
                 String eventFormatted = new JSONObject()
                         .put("usuario",item.getRFC_usuario())
                         .put("ganador",false)
+                        .put("empresa",empresa)
+                        .put("tipoAccion",tipoAccion)
                         .put("hilo",idHilo).toString();
                 notificarEvento(item.getId_session(),"finalizacion-propuesta",eventFormatted);
             }
