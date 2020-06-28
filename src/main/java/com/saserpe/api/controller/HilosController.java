@@ -209,7 +209,7 @@ public class HilosController {
                     .put("usuario",ganador.getRFC_usuario())
                     .put("ganador",true)
                     .put("empresa",ganador.getRFC_empresa())
-                    .put("tipo de accion",ganador.getTipo_accion())
+                    .put("tipoAccion",ganador.getTipo_accion())
                     .put("hilo",ganador.getId_hilo()).toString();
 
             logger.debug("Ganador es {}",ganador.getRFC_usuario());
