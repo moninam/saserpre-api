@@ -14,7 +14,7 @@ public interface HilosRepository extends JpaRepository<Hilos,Integer> {
     @Transactional
     @Query(nativeQuery = true, value = "Select * from Hilos hilo " +
             "where hilo.activo = true "+
-            "order by hilo.tipo_accion asc ,hilo.actualizacion desc ")
+            "order by hilo.tipo_accion desc ,hilo.actualizacion desc ")
     List<Hilos> getHilosDesc();
 
     @Transactional
