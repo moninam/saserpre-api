@@ -65,7 +65,7 @@ public class HilosController {
                 String tiempoHilo = item.getActualizacion();
                 long difference = getDifference(tiempoHilo,tiempoAct);
                 logger.debug("Diferencia de tiempos {}",difference);
-
+                logger.debug("Usuario {}",item.getId_hilo());
                 if (difference > 60000L){
                     String idHilo = item.getId_hilo();
                     logger.debug("Hilo : {}",item.getId_hilo());

@@ -33,11 +33,13 @@ public interface PortafolioRepository extends JpaRepository<Portafolio,Integer> 
             "where porta.RFC_empresa = ?2")
     void updatePrecioAccion(float precioA, String RFC_empresa);
 
+    @Transactional
     @Query(nativeQuery = true, value = "Select * from Portafolio porta " +
             "where porta.RFC_usuario = ?1 "+
             "and porta.RFC_empresa = ?2 limit 1")
     Portafolio getElemento(String RFCUsuario, String RFCEmpresa);
 
+    @Transactional
     @Query(nativeQuery = true, value = "Select * from Portafolio porta " +
             "where porta.RFC_usuario = ?1 ")
     List<Portafolio> getElementByRFCUsuario(String RFCUsuario);

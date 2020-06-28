@@ -11,23 +11,23 @@ import java.util.List;
 
 @Repository
 public interface PropuestaRepository extends JpaRepository<Propuesta,Integer> {
-
+    @Transactional
      @Query(nativeQuery = true, value = "Select * from Propuesta bec " +
             "where bec.RFC_empresa = ?1 " +
             "and bec.RFC_usuario = ?2 " +
             "order by bec.fecha_prop desc limit 1")
     Propuesta findByRFCEmpUsr(String RFCEmpresa, String RFCUsuario);
-
+    @Transactional
     @Query(nativeQuery = true, value = "Select * from Propuesta bec " +
             "where bec.id_hilo = ?1 "+
             "order by bec.precio_accion_prop desc limit 1")
      Propuesta getWinnerCompra(String idHilo);
-
+    @Transactional
     @Query(nativeQuery = true, value = "Select * from Propuesta bec " +
             "where bec.id_hilo = ?1 "+
             "order by bec.precio_accion_prop asc limit 1")
     Propuesta getWinnerVenta(String idHilo);
-
+    @Transactional
     @Query(nativeQuery = true, value = "Select * from Propuesta bec " +
             "where bec.id_hilo = ?1 ")
     List<Propuesta> getPropuestasByHilo(String idHilo);

@@ -174,7 +174,7 @@ public class PropuestaController {
             Hilos hilo = hilosService.getHiloByIdHilo(id_hilo);
 
             if(hilo == null){
-                Hilos nuevoHilo = new Hilos(id_hilo,hora,tipoAccion);
+                Hilos nuevoHilo = new Hilos(id_hilo,hora,tAccion);
                 nuevoHilo.setActivo(true);
                 hilosService.save(nuevoHilo);
             } else{

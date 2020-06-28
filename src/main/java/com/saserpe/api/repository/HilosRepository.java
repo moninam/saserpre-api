@@ -11,12 +11,13 @@ import java.util.List;
 
 @Repository
 public interface HilosRepository extends JpaRepository<Hilos,Integer> {
-
+    @Transactional
     @Query(nativeQuery = true, value = "Select * from Hilos hilo " +
             "where hilo.activo = true "+
-            "order by hilo.actualizacion desc ")
+            "order by hilo.tipo_accion asc ,hilo.actualizacion desc ")
     List<Hilos> getHilosDesc();
 
+    @Transactional
     @Query(nativeQuery = true, value = "Select * from Hilos hilo " +
             "order by hilo.actualizacion desc limit 1 ")
     Hilos getActualHilo();
