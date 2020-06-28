@@ -66,7 +66,7 @@ public class HilosController {
                 long difference = getDifference(tiempoHilo,tiempoAct);
                 logger.debug("Diferencia de tiempos {}",difference);
 
-                if (difference > 30000L){
+                if (difference > 60000L){
                     String idHilo = item.getId_hilo();
                     logger.debug("Hilo : {}",item.getId_hilo());
                     logger.debug("Envias mensaje de bloqueo");
