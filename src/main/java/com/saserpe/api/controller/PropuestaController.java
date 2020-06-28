@@ -30,44 +30,7 @@ public class PropuestaController {
 
     private  Logger logger = LogManager.getLogger(this.getClass());
     public List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
-
-    /*
-    public static String empresaNone = new JSONObject()
-            .put("code",404)
-            .put("mensaje","La empresa no se encuentra registrada en el sistema")
-            .toString();
-    public static String accionesInEm = new JSONObject()
-            .put("code",404)
-            .put("mensaje","La empresa no cuenta con las acciones suficientes para continuar la transaccion")
-            .toString();
-    public static String precioNPEmp = new JSONObject()
-            .put("code",404)
-            .put("mensaje","El precio de la accion no puede ser menor al precio actual")
-            .toString();
-
-    public static String portafolioNone = new JSONObject()
-            .put("code",404)
-            .put("mensaje","No cuenta con un portafolio de acciones para la empresa seleccionada")
-            .toString();
-    public static String accionesInUsr = new JSONObject()
-            .put("code",404)
-            .put("mensaje","No cuenta con las acciones suficientes para realizar la venta")
-            .toString();
-    public static String precioNPUsr = new JSONObject()
-            .put("code",404)
-            .put("mensaje","El precio de la accion no puede ser mayor al precio actual")
-            .toString();
-
-    public static String accionNL = new JSONObject()
-            .put("code",404)
-            .put("mensaje","Tipo de operacion no permitida")
-            .toString();
-
-    public static String exitoProp = new JSONObject()
-            .put("code",200)
-            .put("mensaje","La propuesta fue realizada con exito")
-            .toString();*/
-
+    
     public Map<String, String> mensajes = new HashMap<>();
     public Map<String, String> empresaNone = new HashMap<>();
     public Map<String, String> accionesInEm = new HashMap<>();
@@ -210,7 +173,7 @@ public class PropuestaController {
             for (SseEmitter emitter : emitters){
                 try{
                     logger.debug("Entro a envio");
-                    emitter.send(SseEmitter.event().name("propuesta-news").data(eventFormatted));
+                    emitter.send(SseEmitter.event().name("propuesta-news").data("envio"));
                 } catch (IOException exc){
                     emitters.remove(emitter);
                 }
@@ -221,6 +184,12 @@ public class PropuestaController {
             return new ResponseEntity<>(accionNL,HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    @RequestMapping(value = "/propuestas",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost")
+    public List<Propuesta> list(){
+        return service.listAll();
     }
 
     private String setDate(){

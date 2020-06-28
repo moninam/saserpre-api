@@ -51,7 +51,7 @@ public class HilosController {
         sseEmitter.onCompletion(() -> emitters.remove(sseEmitter));
         sseEmitter.onError((e) ->emitters.remove(sseEmitter));
         emitters.put(sessionID,sseEmitter);
-        showAllPropuesta(sessionID);
+        //showAllPropuesta(sessionID);
         return new ResponseEntity<SseEmitter>(sseEmitter, HttpStatus.OK);
     }
 
@@ -66,7 +66,7 @@ public class HilosController {
                 long difference = getDifference(tiempoHilo,tiempoAct);
                 logger.debug("Diferencia de tiempos {}",difference);
                 logger.debug("Usuario {}",item.getId_hilo());
-                if (difference > 60000L){
+                if (difference > 120000L){
                     String idHilo = item.getId_hilo();
                     logger.debug("Hilo : {}",item.getId_hilo());
                     logger.debug("Envias mensaje de bloqueo");
@@ -357,34 +357,11 @@ public class HilosController {
     }
 
     private void updatePropuestas(){
-        List<Propuesta> temp = propuestaService.listAll();
-        String json;
-        if(temp != null){
-            json = new Gson().toJson(temp);
-        } else{
-            json = new JSONObject()
-                    .put("code",404)
-                    .put("mensaje","No existen propuestas registradas")
-                    .toString();
-        }
         for (Map.Entry me : emitters.entrySet()) {
-            notificarEvento(me.getKey().toString(),"actualizar-propuesta",json);
+            notificarEvento(me.getKey().toString(),"actualizar-propuesta","envio");
         }
     }
 
-    private void showAllPropuesta(String sessionID){
-        List<Propuesta> temp = propuestaService.listAll();
-        String json;
-        if(temp != null){
-            json = new Gson().toJson(temp);
-        } else{
-            json = new JSONObject()
-                    .put("code",404)
-                    .put("mensaje","No existen propuestas registradas")
-                    .toString();
-        }
-        notificarEvento(sessionID,"primera-propuesta",json);
-    }
 
     private void updateAccionesEmpresa(String RFCEmpresa,Propuesta ganador){
         try{
