@@ -367,15 +367,19 @@ public class HilosController {
         try{
             Empresa emp = empresaService.findById(RFCEmpresa);
             Integer acciones = emp.getAcciones_empr_disp();
+            Integer accionesTotales = emp.getAcciones_empr_total();
             switch (ganador.getTipo_accion()){
                 case "C":
                     acciones = emp.getAcciones_empr_disp() - ganador.getOperacion_accion_prop();
+
                     break;
                 case "V":
                     acciones = emp.getAcciones_empr_disp() + ganador.getOperacion_accion_prop();
+                    accionesTotales = emp.getAcciones_empr_total() + ganador.getOperacion_accion_prop();
                     break;
             }
             empresaService.updateAccionesDisp(acciones,RFCEmpresa);
+            empresaService.updateAccionesTotales(accionesTotales,RFCEmpresa);
         } catch (NoSuchElementException exc){
 
         }

@@ -23,4 +23,11 @@ public interface EmpresaRepository extends JpaRepository<Empresa,String> {
             "SET empr.acciones_empr_disp = ?1 " +
             "where empr.RFC_empresa = ?2")
     void updateAccionesDisp(Integer accionDisp,String RFCEmpresa);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "UPDATE Empresa empr " +
+            "SET empr.acciones_empr_total = ?1 " +
+            "where empr.RFC_empresa = ?2")
+    void updateAccionesTotales(Integer accionTotal, String RFCEmpresa);
 }

@@ -30,7 +30,7 @@ public class PropuestaController {
 
     private  Logger logger = LogManager.getLogger(this.getClass());
     public List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
-    
+
     public Map<String, String> mensajes = new HashMap<>();
     public Map<String, String> empresaNone = new HashMap<>();
     public Map<String, String> accionesInEm = new HashMap<>();

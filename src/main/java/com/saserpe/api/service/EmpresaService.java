@@ -37,4 +37,8 @@ public class EmpresaService {
     public void updateAccionesDisp(Integer disp, String RFC_empresa){
         repository.updateAccionesDisp(disp,RFC_empresa);
     }
+
+    public void updateAccionesTotales(Integer total, String RFC_empresa){
+        repository.updateAccionesTotales(total,RFC_empresa);
+    }
 }
